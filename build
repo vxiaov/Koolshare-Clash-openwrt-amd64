@@ -1,0 +1,118 @@
+#!/bin/sh
+
+yacd() {
+    fname="yacd.tar.xz"
+    download_url="$(curl -sSL https://github.com/haishanh/yacd/releases/latest  | grep "yacd.tar.xz" | awk '{ gsub(/href=|["]/,""); print "https://github.com"$2 }'|head -1)"
+    curl -o $fname -L $download_url && tar Jxvf $fname  && rm -rf koolclash/webs/koolclash && mv public koolclash/webs/koolclash && rm -f $fname
+    if [ "$?" != "0" ] ; then
+        echo "Update yacd Failed!"
+        return 1
+    fi
+    echo '----------------------------------------'
+    echo 'Update to latest clash-dashboard-yacd'
+    echo '----------------------------------------'
+}
+
+geoip() {
+    # 更新Country.mmdb(全量版本IP数据)
+    url1="https://cdn.jsdelivr.net/gh/alecthw/mmdb_china_ip_list@release/Country.mmdb"
+    url2="http://www.ideame.top/mmdb/Country.mmdb"
+    url3="https://raw.githubusercontent.com/alecthw/mmdb_china_ip_list/release/Country.mmdb"
+    fname="Country.mmdb"
+    curl -o $fname -L ${url1} && mv $fname koolclash/koolclash/config/
+    [[ "$?" == "0" ]] || { curl -o $fname -L ${url2} && mv $fname koolclash/koolclash/config/ ; }
+    [[ "$?" == "0" ]] || { curl -o $fname -L ${url3} && mv $fname koolclash/koolclash/config/ ; }
+    if [ "$?" != "0" ] ; then
+        echo "Update Country.mmdb Failed!"
+        return 1
+    fi
+    echo '----------------------------------------'
+    echo "Update the $fname to latest version"
+    echo '----------------------------------------'
+}
+uridecoder() {
+    git clone https://github.com/learnhard-cn/uridecoder.git
+    cd ./uridecoder/ && make amd64 && mv -f ./uridecoder_linux_amd64 ../koolclash/bin/ && cd ../
+    if [ "$?" != "0" ] ; then
+        echo "Update uridecoder_linux_amd64 Failed!"
+        return 1
+    fi
+    echo '----------------------------------------'
+    echo "Update the uridecoder_linux_amd64 to latest version"
+    echo '----------------------------------------'
+}
+
+pack() {
+
+    mkdir -p koolclash-build/koolclash
+    cp -rf koolclash/* koolclash-build/koolclash
+
+    cd koolclash-build
+
+    tar zcvf ../release/koolclash.tar.gz koolclash
+    cd ..
+
+    mkdir -p koolclash-build/fuckkoolshare
+    cp -rf fuckkoolshare/* koolclash-build/fuckkoolshare
+
+    cd koolclash-build
+    tar zcvf ../release/fuckkoolshare.tar.gz fuckkoolshare
+    cd ..
+
+    rm -rf koolclash-build
+
+    echo '----------------------------------------'
+    echo 'Build the latest version'
+    echo '----------------------------------------'
+}
+
+case $1 in
+dashboard)
+    wget https://github.com/Dreamacro/clash-dashboard/archive/gh-pages.zip
+    unzip gh-pages.zip
+    rm -rf koolclash/webs/koolclash && mkdir -p koolclash/webs/koolclash
+    cp -rf clash-dashboard-gh-pages/* koolclash/webs/koolclash
+    rm -rf gh-pages.zip
+    rm -rf clash-dashboard-gh-pages
+    echo '----------------------------------------'
+    echo 'Update to latest clash-dashboard'
+    echo '----------------------------------------'
+    ;;
+ipdb)
+    wget https://static.clash.to/GeoIP2/GeoIP2-Country.tar.gz -O ipdb.tar.gz
+    mkdir -p geolite
+    tar zxvf ipdb.tar.gz -C geolite
+    chmod 644 geolite/GeoIP2-Country_*/*
+    version=$(ls geolite | grep 'GeoIP2-Country' | sed "s|GeoIP2-Country_||g")
+    cp -rf geolite/GeoIP2-Country_*/GeoIP2-Country.mmdb koolclash/koolclash/config/Country.mmdb
+    rm -rf ipdb.tar.gz
+    rm -rf geolite
+    echo '----------------------------------------'
+    echo "Update the ipdb to $version"
+    echo '----------------------------------------'
+    ;;
+yacd|pack|geoip|uridecoder)
+    $1
+    ;;
+all)
+    geoip
+    yacd
+    uridecoder
+    pack
+    ;;
+*)
+    echo '=================================================='
+    echo '              KoolClash Build Tools'
+    echo '--------------------------------------------------'
+    echo 'Usage: build [option]'
+    echo ''
+    echo "yacd\t\tUpdate clash-dashboard-yacd to latest"
+    echo "geoip\t\tUpdate Country.mmdb to latest, https://github.com/alecthw/mmdb_china_ip_list"
+    echo "dashboard\tUpdate clash-dashboard to latest"
+    echo "ipdb\t\tUpdate GeoLite to latest"
+    echo "uridecoder\t\t Build uridecoder for decoder ss://,ssr://,vmess://"
+    echo "pack\t\tBuild the package"
+    echo "all\t\tAuto build all package"
+    echo '=================================================='
+    ;;
+esac

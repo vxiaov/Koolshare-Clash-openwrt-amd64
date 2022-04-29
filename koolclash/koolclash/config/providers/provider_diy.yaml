@@ -1,0 +1,7 @@
+proxies:
+  - name: test代理分享站(别选我):https://vlike.work/
+    type: ss
+    server: 127.0.0.1
+    password: do_not_use
+    port: 1080
+    cipher: chacha20-ietf-poly1305

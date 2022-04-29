@@ -1,0 +1,463 @@
+proxies:
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.175:8080-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.175
+    password: KixLvKzwjekG00rm
+    port: 8080
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.236:802-可用-中转:167.88.61.2-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.236
+    password: G!yBwPWH3Vao
+    port: 802
+    cipher: chacha20-ietf-poly1305
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.175:7306-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.175
+    password: FoOiGlkAA9yPEGP
+    port: 7306
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.175:8008-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.175
+    password: XKFKl2rULjIp74
+    port: 8008
+    cipher: aes-256-gcm
+  - name: "\U0001F1F3\U0001F1F1:荷兰-ss-45.147.160.86:813-可用-直连-仅支持荷兰地区NF自制剧"
+    type: ss
+    server: 45.147.160.86
+    password: Ultr@r00t_2017
+    port: 813
+    cipher: chacha20-ietf-poly1305
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.175:443-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.175
+    password: pKEW8JPByTVTLtM
+    port: 443
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.204:3306-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.204
+    password: Y6R9pAtvxxzmGC
+    port: 3306
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-192.46.209.146:3306-可用-直连-仅支持印度地区NF自制剧"
+    type: ss
+    server: 192.46.209.146
+    password: Y6R9pAtvxxzmGC
+    port: 3306
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-192.46.209.215:8000-可用-直连-仅支持印度地区NF自制剧"
+    type: ss
+    server: 192.46.209.215
+    password: KixLvKzwjekG00rm
+    port: 8000
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.175:8881-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.175
+    password: kDWvXYZoTBcGkC4
+    port: 8881
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.175:5003-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.175
+    password: g5MeD6Ft3CWlJId
+    port: 5003
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.175:5600-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.175
+    password: Y6R9pAtvxxzmGC
+    port: 5600
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.175:6679-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.175
+    password: TEzjfAYq2IjtuoS
+    port: 6679
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.175:8119-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.175
+    password: cdBIDV42DCwnfIN
+    port: 8119
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.175:5004-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.175
+    password: g5MeD6Ft3CWlJId
+    port: 5004
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.130:3389-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.130
+    password: Y6R9pAtvxxzmGC
+    port: 3389
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.130:7307-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.130
+    password: FoOiGlkAA9yPEGP
+    port: 7307
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.130:8888-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.130
+    password: Y6R9pAtvxxzmGC
+    port: 8888
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.130:8080-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.130
+    password: KixLvKzwjekG00rm
+    port: 8080
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.130:5003-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.130
+    password: g5MeD6Ft3CWlJId
+    port: 5003
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.204:7307-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.204
+    password: FoOiGlkAA9yPEGP
+    port: 7307
+    cipher: aes-256-gcm
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.204:8091-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.204
+    password: PCnnH6SQSnfoS27
+    port: 8091
+    cipher: aes-256-gcm
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-5.183.179.167:9020-可用-直连-仅支持德国地区NF自制剧"
+    type: ss
+    server: 5.183.179.167
+    password: BNmAXXxAHYpTRdzu
+    port: 9020
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-5.183.179.167:9031-可用-直连-仅支持德国地区NF自制剧"
+    type: ss
+    server: 5.183.179.167
+    password: BwcAUZk8hUFAkDGN
+    port: 9031
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-5.183.179.167:9003-可用-直连-仅支持德国地区NF自制剧"
+    type: ss
+    server: 5.183.179.167
+    password: JdmRK9gMEqFgs8nP
+    port: 9003
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-5.183.179.167:9027-可用-直连-仅支持德国地区NF自制剧"
+    type: ss
+    server: 5.183.179.167
+    password: EXN3S3eQpjE7EJu8
+    port: 9027
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.64:9046-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.64
+    password: NvS8N4Vf8qAGPSCL
+    port: 9046
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.66:9094-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.66
+    password: rpgbNnU9rDDU4aWZ
+    port: 9094
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-5.183.179.167:9018-可用-直连-仅支持德国地区NF自制剧"
+    type: ss
+    server: 5.183.179.167
+    password: fG2artUmHfNT2cX7
+    port: 9018
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-5.183.179.167:9045-可用-直连-仅支持德国地区NF自制剧"
+    type: ss
+    server: 5.183.179.167
+    password: Lp27rqyJq72bZsqX
+    port: 9045
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.177:9015-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.177
+    password: ZpNDDKRu9MagNvaf
+    port: 9015
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-5.183.179.167:9040-可用-直连-仅支持德国地区NF自制剧"
+    type: ss
+    server: 5.183.179.167
+    password: p9z5BVADH2YFs3MN
+    port: 9040
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.177:9001-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.177
+    password: UkXRsXvR6buDMG2Y
+    port: 9001
+    cipher: aes-256-cfb
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.204:443-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.204
+    password: pKEW8JPByTVTLtM
+    port: 443
+    cipher: aes-256-gcm
+  - name: "\U0001F1E8\U0001F1F3:中国-ss-14.29.124.168:24015-可用-中转:223.26.73.202-仅支持台湾地区NF自制剧"
+    type: ss
+    server: 14.29.124.168
+    password: QazEdcTgb159@$*
+    port: 24015
+    cipher: aes-128-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.64:9094-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.64
+    password: rpgbNnU9rDDU4aWZ
+    port: 9094
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-5.183.179.167:9088-可用-直连-仅支持德国地区NF自制剧"
+    type: ss
+    server: 5.183.179.167
+    password: f8npKgNzdkss2ytn
+    port: 9088
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-5.183.179.167:9025-可用-直连-仅支持德国地区NF自制剧"
+    type: ss
+    server: 5.183.179.167
+    password: XPtzA9sCug3SPR4c
+    port: 9025
+    cipher: aes-256-cfb
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.130:2376-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.130
+    password: faBAoD54k87UJG7
+    port: 2376
+    cipher: aes-256-gcm
+  - name: "\U0001F1E8\U0001F1F3:中国-ss-180.163.62.91:10065-可用-中转:129.227.4.81-仅支持韩国地区NF自制剧"
+    type: ss
+    server: 180.163.62.91
+    password: QazEdcTgb159@$*
+    port: 10065
+    cipher: aes-128-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.66:9015-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.66
+    password: ZpNDDKRu9MagNvaf
+    port: 9015
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.64:9033-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.64
+    password: UTJA57ypk2XKQpnm
+    port: 9033
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.66:9098-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.66
+    password: aLpQtfEZe445QyHk
+    port: 9098
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.177:9053-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.177
+    password: SBM7R883jBmnqe6C
+    port: 9053
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.200:9005-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.200
+    password: ZET59LF6DvCC8KVt
+    port: 9005
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.66:9041-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.66
+    password: U6qnYRhfyDmn8sgn
+    port: 9041
+    cipher: aes-256-cfb
+  - name: "\U0001F1EC\U0001F1E7:英国-ss-185.167.117.171:9093-可用-直连-仅支持英国地区NF自制剧"
+    type: ss
+    server: 185.167.117.171
+    password: wfLC2y7rzZyCmuyt
+    port: 9093
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.200:9053-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.200
+    password: SBM7R883jBmnqe6C
+    port: 9053
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.200:9097-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.200
+    password: Sn5B7jTqr76aCJT8
+    port: 9097
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.65:9088-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.65
+    password: f8npKgNzdkss2ytn
+    port: 9088
+    cipher: aes-256-cfb
+  - name: "\U0001F1EC\U0001F1E7:英国-ss-185.167.117.171:9073-可用-直连-仅支持英国地区NF自制剧"
+    type: ss
+    server: 185.167.117.171
+    password: daFYagqDdBdA6VTX
+    port: 9073
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.177:9007-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.177
+    password: kSPmvwdFzGMMW5pY
+    port: 9007
+    cipher: aes-256-cfb
+  - name: "\U0001F1E8\U0001F1F3:中国-ss-180.163.62.91:10064-可用-中转:129.227.4.80-仅支持韩国地区NF自制剧"
+    type: ss
+    server: 180.163.62.91
+    password: QazEdcTgb159@$*
+    port: 10064
+    cipher: aes-128-cfb
+  - name: "\U0001F1EC\U0001F1E7:英国-ss-185.167.117.171:9084-可用-直连-仅支持英国地区NF自制剧"
+    type: ss
+    server: 185.167.117.171
+    password: c3NtHJ5ujV2tGDfj
+    port: 9084
+    cipher: aes-256-cfb
+  - name: "\U0001F1F3\U0001F1F1:荷兰-ss-213.183.51.171:9094-可用-直连-仅支持荷兰地区NF自制剧"
+    type: ss
+    server: 213.183.51.171
+    password: rpgbNnU9rDDU4aWZ
+    port: 9094
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.177:9046-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.177
+    password: NvS8N4Vf8qAGPSCL
+    port: 9046
+    cipher: aes-256-cfb
+  - name: "\U0001F1EC\U0001F1E7:英国-ss-185.167.117.171:9027-可用-直连-仅支持英国地区NF自制剧"
+    type: ss
+    server: 185.167.117.171
+    password: EXN3S3eQpjE7EJu8
+    port: 9027
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.67:9026-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.67
+    password: QWDDvVE9npNurQfA
+    port: 9026
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.200:9001-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.200
+    password: UkXRsXvR6buDMG2Y
+    port: 9001
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.66:9097-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.66
+    password: Sn5B7jTqr76aCJT8
+    port: 9097
+    cipher: aes-256-cfb
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.130:8000-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.130
+    password: KixLvKzwjekG00rm
+    port: 8000
+    cipher: aes-256-gcm
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-5.183.179.167:9093-可用-直连-仅支持德国地区NF自制剧"
+    type: ss
+    server: 5.183.179.167
+    password: wfLC2y7rzZyCmuyt
+    port: 9093
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.200:9059-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.200
+    password: 9XwYyZsK8SNzQDtY
+    port: 9059
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.177:9043-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.177
+    password: HSZuyJQcWe8dxNdF
+    port: 9043
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.66:9045-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.66
+    password: Lp27rqyJq72bZsqX
+    port: 9045
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.177:9027-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.177
+    password: EXN3S3eQpjE7EJu8
+    port: 9027
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.200:9046-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.200
+    password: NvS8N4Vf8qAGPSCL
+    port: 9046
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.65:9014-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.65
+    password: KnJGad3FqTvjqbaX
+    port: 9014
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.64:9088-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.64
+    password: f8npKgNzdkss2ytn
+    port: 9088
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.65:9026-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.65
+    password: QWDDvVE9npNurQfA
+    port: 9026
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.200:9079-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.200
+    password: TPqX8edgbAURcAMb
+    port: 9079
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.64:9015-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.64
+    password: ZpNDDKRu9MagNvaf
+    port: 9015
+    cipher: aes-256-cfb
+  - name: "\U0001F1F3\U0001F1F1:荷兰-ss-213.183.59.229:9020-可用-直连-仅支持荷兰地区NF自制剧"
+    type: ss
+    server: 213.183.59.229
+    password: BNmAXXxAHYpTRdzu
+    port: 9020
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-213.183.53.200:9014-可用-直连-仅支持俄罗斯联邦地区NF自制剧"
+    type: ss
+    server: 213.183.53.200
+    password: KnJGad3FqTvjqbaX
+    port: 9014
+    cipher: aes-256-cfb
+  - name: "\U0001F1FA\U0001F1F8:美国-ss-167.88.61.130:7306-可用-直连-仅支持美国地区NF自制剧"
+    type: ss
+    server: 167.88.61.130
+    password: FoOiGlkAA9yPEGP
+    port: 7306
+    cipher: aes-256-gcm
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.65:9042-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.65
+    password: S7KwUu7yBy58S3Ga
+    port: 9042
+    cipher: aes-256-cfb
+  - name: "\U0001F1F7\U0001F1FA:俄罗斯-ss-217.30.10.65:9045-可用-直连-仅支持波兰地区NF自制剧"
+    type: ss
+    server: 217.30.10.65
+    password: Lp27rqyJq72bZsqX
+    port: 9045
+    cipher: aes-256-cfb
