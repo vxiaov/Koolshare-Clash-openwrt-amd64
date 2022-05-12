@@ -386,6 +386,13 @@
                     <div id="koolclash-ipdb-panel" style="margin-top: 8px"></div>
                 </div>
             </div>
+            <div class="box">
+                <div class="heading">CloudFlare动态DNS更新管理</div>
+                <div class="content">
+                    <p>使用CloudFlare的DDNS服务可以帮助您远程管理家庭内网主机:<b style="color: red;">远程访问内网的HTTP、SSH等服务.(建议设置复杂密码/以免被暴力破解)</b></p>
+                    <div id="koolclash-cfddns-panel" style="margin-top: 8px"></div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -415,6 +422,17 @@
                     {
                         title: '<b>Clash 看门狗进程状态</b>',
                         text: '<span id="koolclash_watchdog_status" name="koolclash_watchdog_status" color="#1bbf35">正在获取 Clash 看门狗进程状态...</span>'
+                    },
+                    {
+                        title: '黑白名单切换(重启后生效)',
+                        name: 'koolclash-select-mode',
+                        type: 'select',
+                        options: [ 
+                            ['whitelist', '白名单(匹配规则代理)'],
+                            ['blacklist', '黑名单(匹配规则直连)']
+                        ],
+                        value: window.dbus.koolclash_work_mode || 'blacklist',
+                        suffix: '<button type="button" id="koolclash-btn-switch-mode" onclick="KoolClash.submitClashSwitchMode();" class="btn btn-primary">切换模式</button>',
                     },
                 ]);
                 $('#koolclash-dashboard-info').forms([
@@ -490,7 +508,6 @@
                         style: 'width: 80%; height: 150px;'
                     },
                 ]);
-
                 $('#koolclash-watchdog-panel').forms([
                     {
                         title: 'Clash 看门狗开关',
@@ -511,13 +528,56 @@
                         text: `${window.dbus.koolclash_ipdb_version || '没有获取到版本信息'}<button type="button" id="koolclash-btn-update-ipdb" onclick="KoolClash.updateIPDB()" class="btn btn-success" style="margin-left: 16px; margin-top: -6px; ">更新 IP 数据库</button>`,
                     },
                 ]);
-
-                /*if (E('_koolclash-acl-default-port').value === '0') {
-                    $('#_koolclash-acl-default-port-user').show();
-                } else {
-                    $('#_koolclash-acl-default-port-user').hide();
-                }*/
-
+                $('#koolclash-cfddns-panel').forms([
+                    {
+                        title: 'CloudFlare DDNS服务管理',
+                        name: 'koolclash_cfddns_enable',
+                        type: 'select',
+                        options: [
+                            ['off', '禁用'],
+                            ['on', '开启']
+                        ],
+                        suffix: '<button type="button" id="koolclash-btn-submit-cfddns" onclick="KoolClash.submitCFDDNS();" class="btn btn-primary">提交</button>',
+                        value: window.dbus.koolclash_cfddns_enable || 'off',
+                    }, {
+                        title: '<b>CF帐号Email:</b>',
+                        name: 'koolclash_cfddns_email',
+                        type: 'text',
+                        value: window.dbus.koolclash_cfddns_email || '',
+                    }, {
+                        title: '<b>CF帐号API-key:</b>',
+                        name: 'koolclash_cfddns_apikey',
+                        type: 'text',
+                        value: window.dbus.koolclash_cfddns_apikey || '',
+                    }, {
+                        title: '<b>CF帐号domain(逗号分割):</b>',
+                        name: 'koolclash_cfddns_domain',
+                        type: 'text',
+                        value: window.dbus.koolclash_cfddns_domain || '',
+                    }, {
+                        title: '<b>TTL生命周期</b><b style="color:red">(可不填)<b>:',
+                        name: 'koolclash_cfddns_ttl',
+                        type: 'text',
+                        value: window.dbus.koolclash_cfddns_ttl || 120,
+                    }, {
+                        title: '<b>获取公网IP命令</b><b style="color:red">(可不填)<b>:',
+                        name: 'koolclash_cfddns_ip',
+                        type: 'text',
+                        value: window.dbus.koolclash_cfddns_ip,
+                    }, {
+                        title: '<b style="color:red">上次检测公网IP<b>:',
+                        name: 'koolclash_cfddns_realip',
+                        type: 'text',
+                        value: window.dbus.koolclash_cfddns_realip || '',
+                        
+                    }, {
+                        title: '<b style="color:red">上次检测时间<b>:',
+                        name: 'koolclash_cfddns_lastmsg',
+                        type: 'text',
+                        readonly: true,
+                        value: window.dbus.koolclash_cfddns_lastmsg || '',
+                    }, 
+                ]);
                 $('.koolclash-nav-log').on('click', KoolClash.getLog);
             },
             // 选择 Tab
@@ -562,21 +622,7 @@
 
                 E('koolclash-version-msg').innerHTML = `当前安装版本&nbsp;:&nbsp;<span id="koolclash-version-installed"></span>&nbsp;&nbsp;|&nbsp;&nbsp;最新发布版本&nbsp;:&nbsp;<span id="koolclash-version-remote"></span>`;
             },
-            defaultDNSConfig: `# 没有找到保存的 Clash 自定义 DNS 配置，推荐使用以下的配置
-dns:
-  enable: true
-  ipv6: false
-  listen: 0.0.0.0:53
-  enhanced-mode: fake-ip
-  nameserver:
-    - 119.28.28.28
-    - 119.29.29.29
-    - 223.5.5.5
-    - tls://dns.rubyfish.cn:853
-  fallback:
-    - tls://1.0.0.1:853
-    - tls://8.8.4.4:853
-`,
+            defaultDNSConfig: Base64.decode("IyDmsqHmnInmib7liLDkv53lrZjnmoQgQ2xhc2gg6Ieq5a6a5LmJIEROUyDphY3nva7vvIzmjqjojZDkvb/nlKjku6XkuIvnmoTphY3nva4KZG5zOgogIGVuYWJsZTogdHJ1ZQogIGlwdjY6IGZhbHNlCiAgbGlzdGVuOiAwLjAuMC4wOjIzNDUzCiAgZW5oYW5jZWQtbW9kZTogcmVkaXItaG9zdCAjIHJlZGlyLWhvc3Qgb3IgZmFrZS1pcAogIGZha2UtaXAtcmFuZ2U6IDE5OC4xOC4wLjEvMTYgIyBGYWtlIElQIGFkZHJlc3NlcyBwb29sIENJRFIKICB1c2UtaG9zdHM6IGZhbHNlICMgbG9va3VwIGhvc3RzIGFuZCByZXR1cm4gSVAgcmVjb3JkCiAgbmFtZXNlcnZlcjoKICAgIC0gMTE0LjExNC4xMTQuMTE0CiAgIyDmj5DkvpsgZmFsbGJhY2sg5pe277yM5aaC5p6cR0VPSVDpnZ4gQ04g5Lit5Zu95pe25L2/55SoIGZhbGxiYWNrIOino+aekAogIGZhbGxiYWNrOgogICAgLSA4LjguOC44ICMgR29vZ2xlIEROUyBvdmVyIFRDUAogICAgLSAxLjEuMS4xICMgY2xvdWRmbGFyZSBETlMgb3ZlciBUQ1AKICAgIC0gdGxzOi8vOC44LjguODo4NTMgIyBHb29nbGUgRE5TIG92ZXIgVExTCiAgICAtIHRsczovLzEuMS4xLjE6ODUzICMgY2xvdWRmbGFyZSBETlMgb3ZlciBUTFMKICAgIC0gaHR0cHM6Ly9kbnMuZ29vZ2xlL2Rucy1xdWVyeSAjIEdvb2dsZSBETlMgb3ZlciBIVFRQUwogICAgLSBodHRwczovL2Nsb3VkZmxhcmUtZG5zLmNvbS9kbnMtcXVlcnkgIyBjbG91ZGZsYXJlIEROUyBvdmVyIEhUVFBTCiAgIyDlvLrliLZETlPop6PmnpDkvb/nlKhgZmFsbGJhY2tg6YWN572uCiAgZmFsbGJhY2stZmlsdGVyOgogICAgIyB0cnVlOiBDTuS9v+eUqG5hbWVzZXJ2ZXLop6PmnpDvvIzpnZ5DTuS9v+eUqGZhbGxiYWNrCiAgICBnZW9pcDogdHJ1ZQogICAgIyBnZW9pcOiuvue9ruS4umZhbHNl5pe25pyJ5pWI77yaIOS4jeWMuemFjWBpcGNpZHJg5Zyw5Z2A5pe25Lya5L2/55SoYG5hbWVzZXJ2ZXJg57uT5p6c77yM5Yy56YWNYGlwY2lkcmDlnLDlnYDml7bkvb/nlKhgZmFsbGJhY2tg57uT5p6c44CCCiAgICBpcGNpZHI6CiAgICAgIC0gMjQwLjAuMC4wLzQKCg=="),
             // getClashStatus
             // 获取 Clash 进程 PID
             getClashStatus: () => {
@@ -668,7 +714,6 @@ dns:
                     }
                 });
             },
-            
             disableAllButton: () => {
                 let btnList = document.getElementsByTagName('button');
                 for (let i of btnList) {
@@ -969,6 +1014,101 @@ dns:
                         } else {
                             E('koolclash-node-msg').innerHTML = '节点删除成功！页面将会自动刷新！<span id="koolclash-wait-time"></span>';
                             KoolClash.tminus(5);
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 5000)
+                        }
+                    },
+                    error: () => {
+                        E('koolclash-node-msg').innerHTML = '提交失败！请重试';
+                        setTimeout(() => {
+                            KoolClash.enableAllButton();
+                        }, 4000)
+                    }
+                });
+            },
+            submitClashSwitchMode: () => {
+                KoolClash.disableAllButton();
+                E('koolclash-node-msg').innerHTML = '正在提交...';
+                let id = parseInt(Math.random() * 100000000),
+                    postData,
+                    checked;
+
+                postData = JSON.stringify({
+                    id,
+                    "method": "koolclash_main.sh",
+                    "params": [ 
+                        "switch_clash_mode",
+                        E('_koolclash-select-mode').value,
+                    ],
+                    "fields": ""
+                });
+
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: "/_api/",
+                    data: postData,
+                    dataType: "json",
+                    success: (resp) => {
+                        if (resp.result === 'err') {
+                            setTimeout(() => {
+                                KoolClash.enableAllButton();
+                                E('koolclash-node-msg').innerHTML = '切换Clash模式操作失败!';
+                            }, 4000)
+                        } else {
+                            E('koolclash-node-msg').innerHTML = '切换Clash模式成功！页面将会自动刷新！<span id="koolclash-wait-time"></span>';
+                            KoolClash.tminus(3);
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 5000)
+                        }
+                    },
+                    error: () => {
+                        E('koolclash-node-msg').innerHTML = '提交失败！请重试';
+                        setTimeout(() => {
+                            KoolClash.enableAllButton();
+                        }, 4000)
+                    }
+                });
+            },
+            submitCFDDNS: () => {
+                KoolClash.disableAllButton();
+                E('koolclash-node-msg').innerHTML = '正在提交...';
+                let id = parseInt(Math.random() * 100000000),
+                    postData,
+                    checked;
+
+                postData = JSON.stringify({
+                    id,
+                    "method": "koolclash_main.sh",
+                    "params": [ 
+                        "save_cfddns",
+                        E('_koolclash_cfddns_enable').value,
+                        E('_koolclash_cfddns_email').value,
+                        E('_koolclash_cfddns_apikey').value,
+                        `${Base64.encode(E('_koolclash_cfddns_domain').value)}`,
+                        E('_koolclash_cfddns_ttl').value,
+                        `${Base64.encode(E('_koolclash_cfddns_ip').value)}`
+                    ],
+                    "fields": ""
+                });
+
+                $.ajax({
+                    type: "POST",
+                    cache: false,
+                    url: "/_api/",
+                    data: postData,
+                    dataType: "json",
+                    success: (resp) => {
+                        if (resp.result === 'err') {
+                            setTimeout(() => {
+                                KoolClash.enableAllButton();
+                                E('koolclash-node-msg').innerHTML = '保存cfddns操作失败!';
+                            }, 4000)
+                        } else {
+                            E('koolclash-node-msg').innerHTML = '启用cfddns功能成功！页面将会自动刷新！<span id="koolclash-wait-time"></span>';
+                            KoolClash.tminus(3);
                             setTimeout(() => {
                                 window.location.reload();
                             }, 5000)
@@ -1446,7 +1586,8 @@ ${Base64.decode(data.firewall_white_ip)}
                     .then(([ok, status, data, headers]) => {
                         if (ok) {
                             window.dbus = data.result[0];
-                            
+                            window.dbus.koolclash_cfddns_domain = `${Base64.decode(window.dbus.koolclash_cfddns_domain)}`;
+                            window.dbus.koolclash_cfddns_ip = `${Base64.decode(window.dbus.koolclash_cfddns_ip)}`;
                         } else {
                             throw new Error(JSON.stringify(json.error));
                         }

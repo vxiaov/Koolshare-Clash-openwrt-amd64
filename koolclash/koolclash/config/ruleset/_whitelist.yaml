@@ -1,0 +1,64 @@
+# 白名单模式，命中规则直连
+rules:
+  - RULE-SET,applications,DIRECT
+  - DOMAIN,clash.razord.top,DIRECT
+  - DOMAIN,yacd.haishan.me,DIRECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,lancidr,DIRECT
+  - RULE-SET,direct,DIRECT
+  # > Netflix
+  - DOMAIN-SUFFIX,netflix.com,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,netflix.net,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,nflxext.com,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,nflximg.com,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,nflximg.net,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,nflxso.net,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,nflxvideo.net,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,netflixdnstest0.com,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,netflixdnstest1.com,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,netflixdnstest2.com,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,netflixdnstest3.com,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,netflixdnstest4.com,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,netflixdnstest5.com,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,netflixdnstest6.com,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,netflixdnstest7.com,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,netflixdnstest8.com,NETFLIX_PROXY
+  - DOMAIN-SUFFIX,netflixdnstest9.com,NETFLIX_PROXY
+  # Netflix测速网站
+  - DOMAIN-SUFFIX,fast.com,NETFLIX_PROXY
+  # - RULE-SET,video_netflix,NETFLIX_PROXY
+  # > TikTok
+  - PROCESS-NAME,com.ss.android.ugc.trill,TIKTOK_PROXY
+  - DOMAIN-SUFFIX,byteoversea.com,TIKTOK_PROXY
+  - DOMAIN-SUFFIX,ibytedtos.com,TIKTOK_PROXY
+  - DOMAIN-SUFFIX,ipstatp.com,TIKTOK_PROXY
+  - DOMAIN-SUFFIX,muscdn.com,TIKTOK_PROXY
+  - DOMAIN-SUFFIX,musical.ly,TIKTOK_PROXY
+  - DOMAIN-SUFFIX,tiktok.com,TIKTOK_PROXY
+  - DOMAIN-SUFFIX,tik-tokapi.com,TIKTOK_PROXY
+  - DOMAIN-SUFFIX,tiktokcdn.com,TIKTOK_PROXY
+  - DOMAIN-SUFFIX,tiktokv.com,TIKTOK_PROXY
+  # - RULE-SET,video_tiktok,TIKTOK_PROXY
+  # > iQIYI
+  - DOMAIN-SUFFIX,iq.com,IQIYI_PROXY
+  - DOMAIN,intl.iqiyi.com,IQIYI_PROXY
+  - DOMAIN,intl-rcd.iqiyi.com,IQIYI_PROXY
+  - DOMAIN,intl-subscription.iqiyi.com,IQIYI_PROXY
+  # - RULE-SET,video_iqiyi,IQIYI_PROXY
+  # > Bilibili
+  - PROCESS-NAME,com.bilibili.app.in,BILI_PROXY
+  - PROCESS-NAME,tv.danmaku.bili,BILI_PROXY
+  - DOMAIN-SUFFIX,acg.tv,BILI_PROXY
+  - DOMAIN-SUFFIX,acgvideo.com,BILI_PROXY
+  - DOMAIN-SUFFIX,b23.tv,BILI_PROXY
+  - DOMAIN-SUFFIX,biliapi.com,BILI_PROXY
+  - DOMAIN-SUFFIX,biliapi.net,BILI_PROXY
+  - DOMAIN-SUFFIX,bilibili.com,BILI_PROXY
+  - DOMAIN-SUFFIX,biligame.com,BILI_PROXY
+  - DOMAIN-SUFFIX,biligame.net,BILI_PROXY
+  - DOMAIN-SUFFIX,bilivideo.com,BILI_PROXY
+  - DOMAIN-SUFFIX,hdslb.com,BILI_PROXY
+  - DOMAIN-SUFFIX,im9.com,BILI_PROXY
+  - DOMAIN-SUFFIX,smtcdns.net,BILI_PROXY
+  - GEOIP,CN,DIRECT,no-resolve
+  - MATCH,默认代理组

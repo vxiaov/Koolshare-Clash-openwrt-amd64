@@ -56,9 +56,7 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
   provider_free:
     # 墙内可用代理组
-    type: http
-    url: "https://cdn.jsdelivr.net/gh/learnhard-cn/free_proxy_ss@main/clash/providers/provider_free.yaml"
-    interval: 3600
+    type: file
     path: ./providers/provider_free.yaml
     health-check:
       enable: true
@@ -66,9 +64,7 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
   provider_outwall:
     # 被墙代理组
-    type: http
-    url: "https://cdn.jsdelivr.net/gh/learnhard-cn/free_proxy_ss@main/clash/providers/provider_outwall.yaml"
-    interval: 3600
+    type: file
     path: ./providers/provider_outwall.yaml
     health-check:
       enable: true
@@ -76,9 +72,7 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
   provider_netflix:
     # 解锁Netflix代理组
-    type: http
-    url: "https://cdn.jsdelivr.net/gh/learnhard-cn/free_proxy_ss@main/clash/providers/provider_netflix.yaml"
-    interval: 3600
+    type: file
     path: ./providers/provider_netflix.yaml
     health-check:
       enable: true
@@ -86,9 +80,7 @@ proxy-providers:
       url: http://www.gstatic.com/generate_204
   provider_home_netflix:
     # 解锁Netflix代理组
-    type: http
-    url: "https://cdn.jsdelivr.net/gh/learnhard-cn/free_proxy_ss@main/clash/providers/provider_home_netflix.yaml"
-    interval: 3600
+    type: file
     path: ./providers/provider_home_netflix.yaml
     health-check:
       enable: true

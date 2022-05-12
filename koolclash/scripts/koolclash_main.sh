@@ -28,11 +28,18 @@ dns_file="$KSROOT/koolclash/config/dns.yml"
 provider_diy_file="$KSROOT/koolclash/config/providers/provider_diy.yaml"
 tmp_node_file="/tmp/upload/tmp_diy_node.yaml"
 db_file="$KSROOT/koolclash/config/Country.mmdb"
+
+rule_whitelist="$KSROOT/koolclash/config/ruleset/_whitelist.yaml"
+rule_blacklist="$KSROOT/koolclash/config/ruleset/_blacklist.yaml"
+
+
+main_script="$KSROOT/scripts/koolclash_main.sh"
 default_test_node="proxies:\n- name:  "test"\n    type:  ss\n    server:  127.0.0.1\n    port:  9999\n    password:  123456\n    cipher:  aes-256-gcm"
 
 redir_port=23456        # 代理转发端口
 dns_port=23453          # DNS服务端口
 ui_port=6170            # Restful API访问接口
+
 
 
 curl=$(which curl)
@@ -427,6 +434,148 @@ koolclash_watchdog_enable() {
     dbus set koolclash_watchdog_enable=$1
     http_response "ok"
 }
+
+################################ proxy-provider管理模块 ##########
+
+proxy_provider_list() {
+    pp_list="$(yq e '.proxy-providers[]|key' $config_file)"
+    
+}
+
+################################ proxy-provider管理模块 END ##########
+start_cfddns(){
+    # 配置检测
+    [[ -z "$koolclash_cfddns_email" ]]  && echo_date "email 没填写!" && return 1
+    [[ -z "$koolclash_cfddns_apikey" ]]  && echo_date "apikey 没填写!" && return 1
+    [[ -z "$koolclash_cfddns_domain" ]]  && echo_date "domain 没填写!" && return 1
+    [[ -z "$koolclash_cfddns_ttl" ]]  && koolclash_cfddns_ttl="120"
+    [[ -z "$koolclash_cfddns_ip" ]]  && koolclash_cfddns_cmd_ip='curl https://httpbin.org/ip 2>/dev/null |grep origin|cut -d\" -f4' && dbus set koolclash_cfddns_ip=$(echo "$koolclash_cfddns_cmd_ip"|base64)
+    [[ -z "$koolclash_cfddns_ip" ]]  && echo_date "可能网络链接有问题，暂时无法访问外网,稍后再试!" && return 1
+    # 支持多个域名更新
+    koolclash_cfddns_dec_domain="$(echo $koolclash_cfddns_domain|base64 -d -w0)"
+    koolclash_cfddns_cmd_ip="$(echo $koolclash_cfddns_ip|base64 -d -w0)"
+    for current_domain in `echo $koolclash_cfddns_dec_domain | sed 's/[,，]/ /g'`
+    do
+        echo "当前域名: $current_domain"
+        koolclash_cfddns_zone=`echo $current_domain| cut -d. -f2,3`
+        koolclash_cfddns_zid=$(curl -X GET "https://api.cloudflare.com/client/v4/zones?name=$koolclash_cfddns_zone" -H "X-Auth-Email: $koolclash_cfddns_email" -H "X-Auth-Key: $koolclash_cfddns_apikey" -H "Content-Type: application/json" | jq -r '.result[0].id')
+        koolclash_cfddns_recid=$(curl -X GET "https://api.cloudflare.com/client/v4/zones/$koolclash_cfddns_zid/dns_records?name=$current_domain" -H "X-Auth-Email: $koolclash_cfddns_email" -H "X-Auth-Key: $koolclash_cfddns_apikey" -H "Content-Type: application/json" | jq -r '.result[0].id')
+        dbus set koolclash_cfddns_ttl=$koolclash_cfddns_ttl
+        real_ip=`echo ${koolclash_cfddns_cmd_ip}|sh 2>/dev/null`
+        if [ "$?" != "0" -o "$real_ip" = "" ] ; then
+            echo_date "获取IP地址失败! 执行命令:[$koolclash_cfddns_cmd_ip], 提取结果:[$real_ip]"
+            return 1
+        fi
+        dbus set koolclash_cfddns_realip=$real_ip
+        update=$(curl -s -X PUT "https://api.cloudflare.com/client/v4/zones/$koolclash_cfddns_zid/dns_records/$koolclash_cfddns_recid" -H "X-Auth-Email: $koolclash_cfddns_email" -H "X-Auth-Key: $koolclash_cfddns_apikey" -H "Content-Type: application/json" --data "{\"id\":\"$koolclash_cfddns_zid\",\"type\":\"A\",\"name\":\"$current_domain\",\"content\":\"$real_ip\"}")
+        res=`echo $update| jq -r .success`
+        if [[ "$res" != "true" ]]; then
+            echo_date "更新结果失败!"
+            echo "失败详细信息:"
+            echo "$update| jq ."
+        else
+            echo_date "更新DDNS成功!"
+            # 添加cron调度
+            ttl=`expr $koolclash_cfddns_ttl / 60`
+            if [ "$ttl" -lt "2" -o "$ttl" -ge "1440" ] ; then
+                ttl="2"
+            fi
+            cron_file="/etc/crontabs/root"
+            if grep start_cfddns $cron_file >/dev/null ; then 
+                echo_date "已添加过Cloudflare的DDNS调度"
+            else
+                cron_job="*/${ttl} * * * * ${main_script} start_cfddns >/dev/null 2>&1"
+                echo_date "调度配置: [${cron_job}]"
+                echo "$cron_job" >> $cron_file
+                if grep start_cfddns $cron_file >/dev/null ; then 
+                    echo_date "添加Cloudflare的DDNS调度结果: 成功!"
+                else
+                    echo_date "添加Cloudflare的DDNS调度结果: 失败!"
+                    [[ -d "$(dirname $cron_file)" ]] || ( echo_date "cron路径[$cron_file]目录不存在!" && exit 0)
+                    echo_date "可能是添加的命令格式错误了:[$cron_job]"
+                    exit 0
+                fi
+            fi
+            koolclash_cfddns_lastmsg="`date +'%Y/%m/%d %H:%M:%S'`"
+            dbus set koolclash_cfddns_lastmsg=$koolclash_cfddns_lastmsg
+        fi
+        echo_date "$koolclash_cfddns_lastmsg"
+    done
+}
+
+# 保存DDNS配置
+save_cfddns() {
+    export koolclash_cfddns_enable="$1"
+    export koolclash_cfddns_email="$2"
+    export koolclash_cfddns_apikey="$3"
+    export koolclash_cfddns_dec_domain="$(echo $4 | base64 -d -w0)"
+    export koolclash_cfddns_ttl="$5"
+    export koolclash_cfddns_cmd_ip="$(echo $6| base64 -d -w0)"
+
+    dbus set koolclash_cfddns_enable=$koolclash_cfddns_enable
+    dbus set koolclash_cfddns_email=$koolclash_cfddns_email
+    dbus set koolclash_cfddns_apikey=$koolclash_cfddns_apikey
+    dbus set koolclash_cfddns_domain="$4"
+    dbus set koolclash_cfddns_ttl=$koolclash_cfddns_ttl
+    dbus set koolclash_cfddns_ip="$6"
+    cron_file="/etc/crontabs/root"
+    if [ "$koolclash_cfddns_enable" != "on" ] ; then
+        echo_date "正在关闭 Cloudflare DDNS功能:"
+        sed -i '/start_cfddns/d' $cron_file
+        echo_date "已经关闭 Cloudflare DDNS功能了."
+    else
+        echo_date "正在启用 Cloudflare DDNS功能:"
+        # 添加cron调度
+        ttl=`expr $koolclash_cfddns_ttl / 60`
+        if [ "$ttl" -lt "2" -o "$ttl" -ge "1440" ] ; then
+            ttl="2"
+        fi
+        if grep start_cfddns $cron_file >/dev/null ; then 
+            echo_date "已添加过Cloudflare的DDNS调度"
+        else
+            cron_job="*/${ttl} * * * * ${main_script} start_cfddns >/dev/null 2>&1"
+            echo_date "调度配置: [${cron_job}]"
+            echo "$cron_job" >> $cron_file
+            if grep start_cfddns $cron_file >/dev/null ; then 
+                echo_date "添加Cloudflare的DDNS调度结果: 成功!"
+            else
+                echo_date "添加Cloudflare的DDNS调度结果: 失败!"
+                [[ -d "$(dirname $cron_file)" ]] || ( echo_date "cron路径[$cron_file]目录不存在!" && http_response "error_cron_dir" )
+                echo_date "可能是添加的命令格式错误了:[$cron_job]"
+                http_response "error_add_cron"
+                exit 0
+            fi
+        fi
+        echo_date "启用 Cloudflare DDNS 成功!"
+    fi
+    http_response "ok"
+}
+
+
+# 切换Clash工作模式
+switch_clash_mode() {
+    # 根据模式
+    work_mode="$1"
+    if [ "$work_mode" != "$koolclash_work_mode" ] ; then
+        # 模式变更(需要重启clash)
+        if [ "$work_mode" == "whitelist" ] ; then
+            yq_expr='select(fi==1).rules as $plist | select(fi==0)|.rules = $plist'
+            yq ea -iP "$yq_expr" $config_file $rule_whitelist
+        else
+            work_mode="blacklist"
+            yq_expr='select(fi==1).rules as $plist | select(fi==0)|.rules = $plist'
+            yq ea -iP "$yq_expr" $config_file $rule_blacklist
+        fi
+        dbus set koolclash_work_mode="$work_mode"
+        echo_date "完成模式规则切换,手工重启生效."
+    else
+        # 模式没有变化
+        echo_date "名单模式没有变化，没有操作!"
+    fi
+    http_response "ok"
+}
+
+
 # 查看Clash状态信息
 koolclash_status() {
     pid_clash=$(pidof clash)
@@ -537,7 +686,11 @@ upload_config_file| sub_delete| koolclash_debug_info| koolclash_status|koolclash
     # 无参数调用模块函数
     $do_action
     ;;
-change_external_controller_ip| sub_update|firewall_white_ip_add|node_add|node_delete_one| koolclash_watchdog_enable)
+save_cfddns)
+    shift 2
+    $do_action $@
+    ;;
+change_external_controller_ip| sub_update|firewall_white_ip_add|node_add|node_delete_one| koolclash_watchdog_enable| switch_clash_mode)
     # 携带参数(参数值加密为Base64格式)模块调用
     $do_action $3
 ;;
@@ -554,6 +707,9 @@ init)
 
     # 第一次初始化节点列表
     node_list "$1"
+;;
+start_cfddns)
+    start_cfddns
 ;;
 esac
 

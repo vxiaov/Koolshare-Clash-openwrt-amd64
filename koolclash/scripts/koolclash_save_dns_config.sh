@@ -4,7 +4,7 @@
 ###
 ########################################
 
-source /koolshare/scripts/koolclash_func.sh
+source /koolshare/scripts/base.sh
 
 
 rm -f $dns_file && touch $dns_file
