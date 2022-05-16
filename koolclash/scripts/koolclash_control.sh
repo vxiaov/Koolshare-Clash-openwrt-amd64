@@ -295,8 +295,10 @@ apply_nat_rules() {
     iptables -t nat -A PREROUTING -p udp --dport 53 -j koolclash_dns
     iptables -t nat -A PREROUTING -p tcp -j koolclash
 
-    iptables -t nat -A koolclash_dns -p udp --dport 53 -j DNAT --to-destination $lan_ip:23453
-    iptables -t nat -A koolclash_dns -p tcp --dport 53 -j DNAT --to-destination $lan_ip:23453
+    # iptables -t nat -A koolclash_dns -p udp --dport 53 -j DNAT --to-destination $lan_ip:23453
+    # iptables -t nat -A koolclash_dns -p tcp --dport 53 -j DNAT --to-destination $lan_ip:23453
+    iptables -t nat -A koolclash_dns -p udp --dport 53 -j REDIRECT --to-ports $dns_port
+    iptables -t nat -A koolclash_dns -p tcp --dport 53 -j REDIRECT --to-ports $dns_port
 
     # IP Whitelist
     # 包括路由器本机 IP

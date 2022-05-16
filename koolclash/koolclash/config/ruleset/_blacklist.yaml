@@ -4,7 +4,13 @@ rules:
   - DOMAIN,clash.razord.top,DIRECT
   - DOMAIN,yacd.haishan.me,DIRECT
   - RULE-SET,private,DIRECT
-  - RULE-SET,direct,DIRECT
+  # 先匹配代理规则后直连(防止DNS污染问题)
+  - RULE-SET,tld-not-cn,默认代理组
+  - RULE-SET,google,默认代理组
+  - RULE-SET,gfw,默认代理组
+  - RULE-SET,proxy,默认代理组
+  - RULE-SET,greatfire,默认代理组
+  - RULE-SET,telegramcidr,默认代理组
   # > Netflix
   - DOMAIN-SUFFIX,netflix.com,NETFLIX_PROXY
   - DOMAIN-SUFFIX,netflix.net,NETFLIX_PROXY
@@ -60,10 +66,4 @@ rules:
   - DOMAIN-SUFFIX,im9.com,BILI_PROXY
   - DOMAIN-SUFFIX,smtcdns.net,BILI_PROXY
   #
-  - RULE-SET,tld-not-cn,默认代理组
-  - RULE-SET,google,默认代理组
-  - RULE-SET,gfw,默认代理组
-  - RULE-SET,proxy,默认代理组
-  - RULE-SET,greatfire,默认代理组
-  - RULE-SET,telegramcidr,默认代理组
   - MATCH,DIRECT

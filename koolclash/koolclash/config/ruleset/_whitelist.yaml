@@ -5,7 +5,6 @@ rules:
   - DOMAIN,yacd.haishan.me,DIRECT
   - RULE-SET,private,DIRECT
   - RULE-SET,lancidr,DIRECT
-  - RULE-SET,direct,DIRECT
   # > Netflix
   - DOMAIN-SUFFIX,netflix.com,NETFLIX_PROXY
   - DOMAIN-SUFFIX,netflix.net,NETFLIX_PROXY
@@ -60,5 +59,8 @@ rules:
   - DOMAIN-SUFFIX,hdslb.com,BILI_PROXY
   - DOMAIN-SUFFIX,im9.com,BILI_PROXY
   - DOMAIN-SUFFIX,smtcdns.net,BILI_PROXY
+  # 直连规则
+  - RULE-SET,direct,DIRECT
   - GEOIP,CN,DIRECT,no-resolve
+  # 默认规则
   - MATCH,默认代理组
