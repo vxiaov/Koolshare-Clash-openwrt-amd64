@@ -666,8 +666,7 @@
                         E('koolclash_status').innerHTML = pid_text;
                         E('koolclash_watchdog_status').innerHTML = pid_watchdog_text;
                         E('_koolclash_dashboard_host').value = control_host;
-                        E('btn-open-clash-dashboard').href = `http://${control_host}:6170/ui/`
-
+                        E('btn-open-clash-dashboard').href = `http://${control_host}:6170/ui/?hostname=${control_host}&port=6170&secret=route`
                         /*
                          * 0 没有找到 config.yaml
                          * 1 origin.yml DNS 配置合法
